@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create</title>
+  <script src="https://kit.fontawesome.com/d89d9128cc.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      background-color: black;
+      color: aliceblue;
+    }
+
+    .navbar-heading h1 {
+      text-align: center;
+    }
+
+    .login_container {
+      margin-top: 3vh;
+      border-radius: 10px;
+      height: 70vh;
+      width: 70vh;
+      border: 2px solid aliceblue;
+      margin-left: 60vh;
+      background-color: rgba(189, 255, 189, 0.745);
+      color: aliceblue;
+      box-shadow: 0 0 10px 10px rgba(189, 255, 189, 0.745);
+    }
+
+    .login_container h1 {
+      text-align: center;
+
+    }
+
+    .main-area {
+
+      height: 50vh;
+      width: 30vw;
+      margin-left: 7vh;
+      display: flex;
+      flex-direction: column;
+      gap: 2vh;
+      align-items: center;
+      padding-top: 3vh;
+    }
+
+    .main-area div label {
+      font-size: larger;
+    }
+
+    .main-area div input {
+      height: 5vh;
+      width: 28vw;
+      font-size: larger;
+      padding-left: 2vh;
+      box-sizing: border-box;
+    }
+
+    .main-area div textarea {
+      height: 35vh;
+      width: 28vw;
+      padding: 2vh;
+      box-sizing: border-box;
+    }
+
+    .main-area div button {
+      height: 5vh;
+      width: 28vw;
+      box-sizing: border-box;
+      margin-left: -4vh;
+    }
+
+    .notes a {
+      color: aliceblue;
+      text-decoration: overline;
+      font-size: larger;
+      position: relative;
+      bottom: 6vh;
+      left: 5vw;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar-heading">
+    <h1>NotiFy</h1>
+  </header>
+  <div class="notes">
+    <a href="/" class="btn"><i class="fa-solid fa-backward"></i></a>
+  </div>
+
+  <section>
+    <% if(typeof message !=='undefined' ){ %>
+      <p>
+        <%= message%> <br />
+      </p>
+      <% } %>
+  </section>
+
+  <main class="login_container">
+    <h1>Add</h1>
+    <form action="/api/notes" method="post">
+      <div class="main-area">
+        <div>
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" placeholder="" required />
+        </div>
+        <div>
+          <label for="content">Content</label>
+          <textarea name="content" id="content" required></textarea>
+        </div>
+        <div>
+          <button type="submit">Add Note</button>
+        </div>
+      </div>
+
+    </form>
+  </main>
+
+</body>
+<script>
+  let colors = ['red', 'lightgreen', 'lightblue', 'pink','red', 'lightgreen', 'lightblue', 'pink','red', 'lightgreen', 'lightblue', 'pink'];
+  function getRandomColor() {
+    let randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  }
+  let randomColor = getRandomColor();
+  document.getElementsByClassName("login_container")[0].style.backgroundColor = randomColor;
+  document.getElementsByClassName("login_container")[0].style.boxShadow = `0 0 10px 10px ${randomColor}`;
+  
+</script>
+
+</html>

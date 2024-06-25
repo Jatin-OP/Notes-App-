@@ -1,4 +1,4 @@
-# Notes App Project
+# P3-Notes Management MERN
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://git.geekyants.com/jatin/notes-app-project.git
+git remote add origin https://git.geekyants.com/abhishek.krishnan/p3-notes-management-mern.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://git.geekyants.com/jatin/notes-app-project/-/settings/integrations)
+- [ ] [Set up project integrations](https://git.geekyants.com/abhishek.krishnan/p3-notes-management-mern/-/settings/integrations)
 
 ## Collaborate with your team
 

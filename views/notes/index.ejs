@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes</title>
+  <script src="https://kit.fontawesome.com/d89d9128cc.js" crossorigin="anonymous"></script>
+</head>
+
+<style>
+  body {
+    background-color: black;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .nav-heading {
+    color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5vh;
+    box-shadow: 0 0 10px 10px aliceblue;
+  }
+
+  .nav-heading div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 28vh;
+  }
+
+  .nav-heading img {
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+  }
+
+  .nav-heading div button {
+    background: none;
+    border: none;
+    color: aliceblue;
+    font-size: large;
+    cursor: pointer;
+  }
+
+  .nav-heading div button a {
+    color: aliceblue;
+    text-decoration: none;
+  }
+
+  .note-detail {
+    border: 2px solid aliceblue;
+    color: aliceblue;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .list-notes {
+    display: flex;
+    margin-top: 10vh;
+  }
+
+  .left_list_notes {
+    width: 30%;
+    padding: 0 2rem;
+  }
+
+  .color {
+    height: 4vh;
+    width: 4vh;
+    border-radius: 50%;
+    background-color: red;
+  }
+
+  .left-note-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+  }
+
+  .left-note-detail div {
+    display: flex;
+    flex-direction: row;
+    gap: 1vh;
+  }
+
+  #left-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .title-but {
+    border: none;
+    background: none;
+    color: aliceblue;
+    font-size: large;
+  }
+
+  .title-but a {
+    text-decoration: none;
+    color: aliceblue;
+  }
+
+  .right_list_notes {
+    width: 70%;
+    padding: 0 2rem;
+  }
+
+  .right_list_notes ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+  }
+
+  .note-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .note-content {
+    padding-top: 1rem;
+  }
+
+  .note-action div {
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+    height: 4vh;
+  }
+
+  .note-action div button i {
+    font-size: large;
+    color: aliceblue;
+  }
+
+  .note-action div button {
+    background: none;
+    border: none;
+  }
+
+  #partition {
+    width: 2px;
+    min-height: 100%;
+    background-color: aliceblue;
+  }
+</style>
+
+<body>
+  <div class="nav-heading">
+    <div>
+      <img src="https://wallpapers.com/images/hd/cool-profile-picture-purple-astronaut-mm73otj7x18b5r7m.jpg" alt="">
+      <p><%= user_email %></p>
+    </div>
+    <div>
+      <button class="btn">
+        <a href="notes/create">Note + </a>
+      </button>
+      <button class="btn" id="logout">Log Out</button>
+    </div>
+  </div>
+
+  <div class="list-notes">
+    <div class="left_list_notes">
+      <h2 style="color: aliceblue;text-align: center;">Notes</h2><br>
+      <ul id="left-list">
+        <% notes.forEach(function(note) { %>
+          <li id="<%= note._id %>" class="left-note-detail">
+            <div>
+              <div class="color"></div>
+              <button class="title-but">
+                <a href="notes/<%= note._id %>">
+                  <%= note.title %>
+                </a>
+              </button>
+            </div>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+
+    <div id="partition"></div>
+
+    <div class="right_list_notes">
+      <ul class="right-list">
+        <% notes.forEach(function(note) { %>
+          <li id="right<%= note._id %>" class="note-detail">
+            <div class="each-li">
+              <div class="note-desc">
+                <div class="note-action">
+                  <h1><%= note.title %></h1>
+                  <div>
+                    <button>
+                      <a href="notes/<%= note._id %>">
+                        <i class="fa-solid fa-eye"></i>
+                      </a>
+                    </button>
+                    <button>
+                      <a href="notes/edit/<%= note._id %>" class="edit-button">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </a>
+                    </button>
+                    <form class="delete-form" data-id="<%= note._id %>">
+                      <button type="submit" style="margin-top:0.5vh;">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                <p class="note-content"><%= note.content %></p>
+              </div>
+            </div>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let colors = ['red', 'lightgreen', 'lightblue', 'pink'];
+    var colorDivs = document.querySelectorAll('.color');
+
+    colorDivs.forEach((div, index) => {
+      div.style.backgroundColor = colors[index % colors.length];
+      div.style.boxShadow = `0 0 14px 2px ${colors[index % colors.length]}`;
+    });
+
+    var rightListItems = document.querySelectorAll('.note-detail');
+
+    rightListItems.forEach((div, index) => {
+      div.style.backgroundColor =colors[index % colors.length];
+      div.style.boxShadow = `0 0 14px 2px ${colors[index % colors.length]}`;
+    });
+
+    document.querySelectorAll(".delete-form").forEach((form) => {
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const noteId = this.getAttribute("data-id");
+        const url = `/api/notes/${noteId}`;
+
+        if (!confirm("Are you sure want to delete the note?")) {
+          return;
+        }
+
+        fetch(url, {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (response.ok) {
+              document.getElementById(noteId).remove();
+              document.getElementById(`right${noteId}`).remove();
+            } else {
+              alert("Failed to delete the note");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Failed to delete the note");
+          });
+      });
+    });
+
+    document.getElementById("logout").addEventListener("click", () => {
+      fetch(`/api/auth/logout`).then((res) => {
+        if (res.ok) {
+          window.location.href = "/";
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

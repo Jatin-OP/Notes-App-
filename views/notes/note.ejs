@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create</title>
+  <style>
+    body {
+      background-color: black;
+      color: aliceblue;
+    }
+    #content{
+      background-color: rgba(189, 255, 189, 0.745);
+    }
+    #nav h1{
+      text-align: center;
+      font-size: 7vh;
+    }
+    #content-container{
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #content-container div{
+      height: 70vh;
+      width: 70vw;
+    }
+    #content{
+      padding: 0 2vh;
+      border-radius: 10px;
+    }
+    .btn{
+      color: aliceblue;
+      text-decoration: none;
+    }
+    #content h1{
+      text-align: center;
+    }
+    #all-notes{
+      position: relative;
+      bottom: 10vh;
+      left: 160vh;
+    }
+    #all-notes a{
+     font-size: 2.5vh;
+    }
+
+
+  </style>
+</head>
+
+<body>
+    <div id="nav">
+      <h1>
+        NotiFy
+      </h1>
+    </div>
+
+  <div id="all-notes" >
+    <a href="/" class="btn">All Notes</a>
+  </div>
+
+  <div id="content-container">
+    <div id="content">
+      <h1>
+        <%= note.title %>
+      </h1>
+      <hr>
+      <br>
+      <p>
+        <%= note.content %>
+      </p>
+    </div>
+  </div>
+
+
+<script>
+  let colors = ['red', 'lightgreen', 'lightblue', 'pink','red', 'lightgreen', 'lightblue', 'pink','red', 'lightgreen', 'lightblue', 'pink'];
+  function getRandomColor() {
+    let randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  }
+  let randomColor = getRandomColor();
+  document.getElementById("content").style.backgroundColor = randomColor;
+  document.getElementById("content").style.boxShadow = `0 0 10px 10px ${randomColor}`;
+</script>
+</body>
+
+</html>
